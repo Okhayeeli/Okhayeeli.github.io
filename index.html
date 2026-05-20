@@ -4,75 +4,303 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Elizabeth</title>
+  <title>Your Name</title>
   <meta name="description" content="Security researcher, writer, and engineer." />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 760px;
-      margin: 70px auto;
-      padding: 0 20px;
-      line-height: 1.7;
-      background: #fafafa;
+      margin: 0;
+      font-family: "Courier New", monospace;
+      background: #ffffff;
       color: #111;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      margin-top: 40px;
+      line-height: 1.6;
     }
 
     a {
-      color: #111;
-      font-weight: bold;
+      color: #333;
+      text-decoration: none;
     }
 
-    .subtitle {
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr 260px;
+      min-height: 100vh;
+    }
+
+    /* LEFT SIDEBAR */
+    .left-sidebar {
+      border-right: 1px solid #ddd;
+      padding: 40px 24px;
+      background: #fafafa;
+    }
+
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 24px;
+      border: 1px solid #ccc;
+    }
+
+    .name {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .role {
+      text-align: center;
+      font-size: 14px;
       color: #555;
-      font-size: 18px;
+      margin-bottom: 44px;
     }
 
-    .post {
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      padding: 90px 80px;
+      max-width: 850px;
+    }
+
+    .intro h1 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+
+    .intro ul {
+      margin-top: 0;
+      margin-bottom: 60px;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .section ul {
+      padding-left: 25px;
+    }
+
+    .post-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .post-list li {
       margin-bottom: 18px;
+    }
+
+    .post-title {
+      font-weight: 700;
+    }
+
+    .post-desc {
+      color: #555;
+      margin: 4px 0 0;
+      font-size: 14px;
+    }
+
+    /* RIGHT SIDEBAR */
+    .right-sidebar {
+      border-left: 1px solid #ddd;
+      padding: 40px 28px;
+      background: #fafafa;
+    }
+
+    .connect-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 26px;
+    }
+
+    .connect {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      font-size: 15px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .layout {
+        display: block;
+      }
+
+      .left-sidebar,
+      .right-sidebar {
+        border: none;
+        padding: 30px 22px;
+      }
+
+      .nav,
+      .connect {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+      }
+
+      .main {
+        padding: 40px 24px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>Elizabeth</h1>
+  <div class="layout">
 
-  <p class="subtitle">
-    Security researcher, writer, and engineer.
-  </p>
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-sidebar">
+      <img
+        src="https://avatars.githubusercontent.com/Okhayeeli"
+        alt="Profile image"
+        class="profile-img"
+      />
 
-  <p>
-    I write about smart contract security, software engineering, audits,
-    and things I am learning in public.
-  </p>
+      <div class="name">Your Name</div>
 
-  <p>
-    <a href="https://github.com/Okhayeeli">GitHub</a> ·
-    <a href="https://x.com/yourhandle">X</a> ·
-    <a href="mailto:youremail@example.com">Email</a>
-  </p>
+      <div class="role">
+        Security Researcher &<br />
+        Developer
+      </div>
 
-  <h2>Writing</h2>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="#writeups">Writeups</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#audits">Audits</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </aside>
 
-  <div class="post">
-    <a href="#">My First Note</a>
-    <p>A short note on why I am starting to write publicly.</p>
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <section class="intro">
+        <h1>Your Name</h1>
+
+        <ul>
+          <li>Smart Contract Security Researcher</li>
+          <li>Building knowledge around EVM, Solana, Rust, and DeFi security</li>
+          <li>Auditor on competitive platforms</li>
+          <li>Writing about things I learn in public</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Core Skills</h2>
+
+        <ul>
+          <li><strong>Focus:</strong> Smart contract security and DeFi protocol analysis</li>
+          <li><strong>Toolkit:</strong> Foundry, Hardhat, Slither, VS Code, GitHub</li>
+          <li><strong>Languages:</strong> Solidity, Rust, JavaScript, Python</li>
+          <li><strong>Interests:</strong> EVM, Solana, lending protocols, oracles, bridges</li>
+        </ul>
+      </section>
+
+      <section class="section" id="writeups">
+        <h2>Writeups</h2>
+
+        <ul class="post-list">
+          <li>
+            <a class="post-title" href="#">My First Note</a>
+            <p class="post-desc">Why I am starting to write publicly.</p>
+          </li>
+
+          <li>
+            <a class="post-title" href="#">Understanding Oracle Staleness</a>
+            <p class="post-desc">A beginner-friendly note on stale prices and lending protocol risk.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="analysis">
+        <h2>Analysis</h2>
+
+        <ul class="post-list">
+          <li>
+            <a class="post-title" href="#">How Lending Protocols Break</a>
+            <p class="post-desc">Notes on collateral, borrowing, liquidation, and accounting bugs.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="audits">
+        <h2>Audits</h2>
+
+        <ul class="post-list">
+          <li>
+            <a class="post-title" href="#">Audit Notes Coming Soon</a>
+            <p class="post-desc">Public notes from security contests and research practice.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="projects">
+        <h2>Projects</h2>
+
+        <ul class="post-list">
+          <li>
+            <a class="post-title" href="#">Security Research Portfolio</a>
+            <p class="post-desc">A growing collection of notes, writeups, and audit research.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" id="resume">
+        <h2>Resume</h2>
+
+        <p>
+          Resume coming soon.
+        </p>
+      </section>
+
+      <section class="section" id="contact">
+        <h2>Contact</h2>
+
+        <p>
+          Reach me through GitHub, X, LinkedIn, or email.
+        </p>
+      </section>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-sidebar">
+      <div class="connect-title">CONNECT</div>
+
+      <div class="connect">
+        <a href="https://github.com/Okhayeeli">GitHub</a>
+        <a href="https://www.linkedin.com/in/yourlinkedin">LinkedIn</a>
+        <a href="https://x.com/yourhandle">X / Twitter</a>
+        <a href="mailto:youremail@example.com">Email</a>
+      </div>
+    </aside>
+
   </div>
-
-  <h2>Research Interests</h2>
-
-  <p>
-    Smart contract security, DeFi protocols, audits, Rust, Solana,
-    EVM, and blockchain infrastructure.
-  </p>
 </body>
 </html>
