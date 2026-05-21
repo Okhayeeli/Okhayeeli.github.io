@@ -35,7 +35,6 @@
       min-height: 100vh;
     }
 
-    /* LEFT SIDEBAR */
     .left-sidebar {
       border-right: 1px solid #ddd;
       padding: 40px 24px;
@@ -74,10 +73,9 @@
       font-weight: 600;
     }
 
-    /* MAIN CONTENT */
     .main {
       padding: 90px 80px;
-      max-width: 900px;
+      max-width: 950px;
     }
 
     .intro h1 {
@@ -91,7 +89,7 @@
     }
 
     .section {
-      margin-bottom: 60px;
+      margin-bottom: 70px;
     }
 
     .section h2 {
@@ -128,20 +126,6 @@
       font-size: 14px;
     }
 
-    .result-card {
-      border: 1px solid #ddd;
-      padding: 18px;
-      margin-bottom: 16px;
-      border-radius: 8px;
-      background: #fafafa;
-    }
-
-    .result-card p {
-      margin: 6px 0 0;
-      color: #555;
-      font-size: 14px;
-    }
-
     .stats {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -167,7 +151,38 @@
       font-size: 14px;
     }
 
-    /* RIGHT SIDEBAR */
+    .card {
+      border: 1px solid #ddd;
+      padding: 18px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .card p {
+      margin: 6px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .tag-list li {
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 13px;
+      color: #444;
+    }
+
     .right-sidebar {
       border-left: 1px solid #ddd;
       padding: 40px 28px;
@@ -188,7 +203,6 @@
       font-size: 15px;
     }
 
-    /* MOBILE */
     @media (max-width: 900px) {
       .layout {
         display: block;
@@ -222,7 +236,6 @@
 <body>
   <div class="layout">
 
-    <!-- LEFT SIDEBAR -->
     <aside class="left-sidebar">
       <img
         src="https://avatars.githubusercontent.com/Okhayeeli"
@@ -239,17 +252,18 @@
 
       <nav class="nav">
         <a href="/">Home</a>
-        <a href="#writeups">Writeups</a>
-        <a href="#analysis">Analysis</a>
+        <a href="#portfolio">Security Portfolio</a>
         <a href="#audits">Audits & Results</a>
         <a href="#projects">Projects</a>
+        <a href="#writeups">Writeups</a>
+        <a href="#analysis">Analysis</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main">
+
       <section class="intro">
         <h1>Elizabeth</h1>
 
@@ -257,7 +271,7 @@
           <li>Smart Contract Security Researcher</li>
           <li>Building knowledge around EVM, Solana, Rust, and DeFi security</li>
           <li>Auditor on competitive platforms</li>
-          <li>Writing about things I learn in public</li>
+          <li>Writing and building in public</li>
         </ul>
       </section>
 
@@ -268,35 +282,63 @@
           <li><strong>Focus:</strong> Smart contract security and DeFi protocol analysis</li>
           <li><strong>Toolkit:</strong> Foundry, Hardhat, Slither, VS Code, GitHub</li>
           <li><strong>Languages:</strong> Solidity, Rust, JavaScript, Python</li>
-          <li><strong>Interests:</strong> EVM, Solana, lending protocols, oracles, bridges</li>
+          <li><strong>Interests:</strong> EVM, Solana, lending protocols, oracles, bridges, and accounting bugs</li>
+        </ul>
+
+        <ul class="tag-list">
+          <li>Solidity</li>
+          <li>Rust</li>
+          <li>Foundry</li>
+          <li>Hardhat</li>
+          <li>DeFi</li>
+          <li>Oracles</li>
+          <li>Lending</li>
+          <li>Bridges</li>
+          <li>Invariant Analysis</li>
         </ul>
       </section>
 
-      <section class="section" id="writeups">
-        <h2>Writeups</h2>
+      <section class="section" id="portfolio">
+        <h2>Security Portfolio</h2>
 
-        <ul class="post-list">
-          <li>
-            <a class="post-title" href="#">My First Note</a>
-            <p class="post-desc">Why I am starting to write publicly.</p>
-          </li>
+        <p>
+          My security portfolio collects audit notes, contest results, vulnerability research,
+          bug bounty work, public findings, and technical writeups.
+        </p>
 
-          <li>
-            <a class="post-title" href="#">Understanding Oracle Staleness</a>
-            <p class="post-desc">A beginner-friendly note on stale prices and lending protocol risk.</p>
-          </li>
-        </ul>
-      </section>
+        <div class="card">
+          <a class="post-title" href="https://github.com/Okhayeeli/audits">
+            Audit Portfolio Repository
+          </a>
+          <p>
+            A public archive of my smart contract security contests, findings,
+            audit notes, research notes, and proof-of-work.
+          </p>
+        </div>
 
-      <section class="section" id="analysis">
-        <h2>Analysis</h2>
+        <div class="card">
+          <span class="post-title">Security Research Notes</span>
+          <p>
+            Notes from studying real exploits, bug classes, lending protocol failures,
+            oracle issues, accounting bugs, and cross-chain security problems.
+          </p>
+        </div>
 
-        <ul class="post-list">
-          <li>
-            <a class="post-title" href="#">How Lending Protocols Break</a>
-            <p class="post-desc">Notes on collateral, borrowing, liquidation, and accounting bugs.</p>
-          </li>
-        </ul>
+        <div class="card">
+          <span class="post-title">Proof-of-Concept Practice</span>
+          <p>
+            Practical testing work using tools like Foundry, Hardhat, Rust test suites,
+            and protocol-specific test environments.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="post-title">Bug Bounty & Contest Reports</span>
+          <p>
+            Publicly shareable contest results, bounty achievements, and writeups
+            from competitive security platforms.
+          </p>
+        </div>
       </section>
 
       <section class="section" id="audits">
@@ -332,47 +374,108 @@
 
         <h3>Selected Contest Results</h3>
 
-        <div class="result-card">
+        <div class="card">
           <strong>Solaxy</strong>
           <p>Placed 7 / 19 — $394 payout — June 2025.</p>
         </div>
 
-        <div class="result-card">
+        <div class="card">
           <strong>Revert Finance</strong>
           <p>Placed 4 / 59 — $154 payout — March 2026.</p>
         </div>
 
-        <div class="result-card">
+        <div class="card">
           <strong>Jigsaw Contracts</strong>
           <p>Placed 58 / 114 — $20 payout — May 2025.</p>
         </div>
 
-        <h3>Audit Portfolio</h3>
+        <h3>HackenProof Achievement</h3>
+
+        <div class="card">
+          <strong>High-Severity Bounty Reward</strong>
+          <p>
+            Reported a high-severity vulnerability through HackenProof and received
+            a $5,000 bounty reward.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h2>Projects & Things I Made</h2>
+
+        <div class="card">
+          <a class="post-title" href="https://github.com/Okhayeeli/audits">
+            Public Audit Portfolio
+          </a>
+          <p>
+            A dedicated repository for my audit reports, contest notes,
+            findings, and smart contract security research.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="post-title">Finding Templates</span>
+          <p>
+            Reusable templates for documenting vulnerability title, severity,
+            root cause, impact, attack path, and recommendation.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="post-title">Audit Learning Notes</span>
+          <p>
+            Structured notes from protocol reviews, exploit breakdowns, and
+            security concepts I am learning in public.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="post-title">Protocol Review Practice</span>
+          <p>
+            Personal review work across DeFi protocols, lending systems,
+            oracle designs, bridge logic, and blockchain infrastructure.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="writeups">
+        <h2>Writeups</h2>
 
         <ul class="post-list">
           <li>
-            <a class="post-title" href="https://github.com/Okhayeeli/audits">
-              Public Audit Portfolio
-            </a>
-            <p class="post-desc">
-              A growing archive of my contest results, security research notes,
-              findings, and audit writeups.
-            </p>
+            <a class="post-title" href="#">My First Note</a>
+            <p class="post-desc">Why I am starting to write publicly.</p>
+          </li>
+
+          <li>
+            <a class="post-title" href="#">Understanding Oracle Staleness</a>
+            <p class="post-desc">A beginner-friendly note on stale prices and lending protocol risk.</p>
+          </li>
+
+          <li>
+            <a class="post-title" href="#">How Lending Protocols Break</a>
+            <p class="post-desc">Notes on collateral, borrowing, liquidation, and accounting bugs.</p>
           </li>
         </ul>
       </section>
 
-      <section class="section" id="projects">
-        <h2>Projects</h2>
+      <section class="section" id="analysis">
+        <h2>Analysis</h2>
 
         <ul class="post-list">
           <li>
-            <a class="post-title" href="https://github.com/Okhayeeli/audits">
-              Audit Portfolio Repository
-            </a>
-            <p class="post-desc">
-              Public security research portfolio containing audit notes, contest results, and findings.
-            </p>
+            <a class="post-title" href="#">Oracle Staleness and Price Validation</a>
+            <p class="post-desc">How stale prices can create insolvency and broken liquidations.</p>
+          </li>
+
+          <li>
+            <a class="post-title" href="#">Invariant-Mismatch Thinking</a>
+            <p class="post-desc">How to trace valid protocol states that later become unsafe or unrecoverable.</p>
+          </li>
+
+          <li>
+            <a class="post-title" href="#">Liquidation and Accounting Bugs</a>
+            <p class="post-desc">Research notes on bad debt, health factors, and broken state transitions.</p>
           </li>
         </ul>
       </section>
@@ -381,31 +484,5 @@
         <h2>Resume</h2>
 
         <p>
-          Resume coming soon.
-        </p>
-      </section>
-
-      <section class="section" id="contact">
-        <h2>Contact</h2>
-
-        <p>
-          Reach me through GitHub, X, LinkedIn, or email.
-        </p>
-      </section>
-    </main>
-
-    <!-- RIGHT SIDEBAR -->
-    <aside class="right-sidebar">
-      <div class="connect-title">CONNECT</div>
-
-      <div class="connect">
-        <a href="https://github.com/Okhayeeli">GitHub</a>
-        <a href="https://www.linkedin.com/in/yourlinkedin">LinkedIn</a>
-        <a href="https://x.com/yourhandle">X / Twitter</a>
-        <a href="mailto:youremail@example.com">Email</a>
-      </div>
-    </aside>
-
-  </div>
-</body>
-</html>
+          Resume coming soon. Current public proof-of-work is available through
+          my audit
