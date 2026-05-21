@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Your Name</title>
+  <title>Elizabeth</title>
   <meta name="description" content="Security researcher, writer, and engineer." />
 
   <style>
@@ -77,7 +77,7 @@
     /* MAIN CONTENT */
     .main {
       padding: 90px 80px;
-      max-width: 850px;
+      max-width: 900px;
     }
 
     .intro h1 {
@@ -97,6 +97,12 @@
     .section h2 {
       font-size: 22px;
       margin-bottom: 20px;
+    }
+
+    .section h3 {
+      font-size: 18px;
+      margin-top: 30px;
+      margin-bottom: 14px;
     }
 
     .section ul {
@@ -119,6 +125,45 @@
     .post-desc {
       color: #555;
       margin: 4px 0 0;
+      font-size: 14px;
+    }
+
+    .result-card {
+      border: 1px solid #ddd;
+      padding: 18px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .result-card p {
+      margin: 6px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      border: 1px solid #ddd;
+      padding: 18px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: #555;
       font-size: 14px;
     }
 
@@ -166,6 +211,10 @@
       .main {
         padding: 40px 24px;
       }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -181,7 +230,7 @@
         class="profile-img"
       />
 
-      <div class="name">Your Name</div>
+      <div class="name">Elizabeth</div>
 
       <div class="role">
         Security Researcher &<br />
@@ -192,7 +241,7 @@
         <a href="/">Home</a>
         <a href="#writeups">Writeups</a>
         <a href="#analysis">Analysis</a>
-        <a href="#audits">Audits</a>
+        <a href="#audits">Audits & Results</a>
         <a href="#projects">Projects</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
@@ -202,7 +251,7 @@
     <!-- MAIN CONTENT -->
     <main class="main">
       <section class="intro">
-        <h1>Your Name</h1>
+        <h1>Elizabeth</h1>
 
         <ul>
           <li>Smart Contract Security Researcher</li>
@@ -251,12 +300,64 @@
       </section>
 
       <section class="section" id="audits">
-        <h2>Audits</h2>
+        <h2>Audits & Security Research</h2>
+
+        <p>
+          I participate in smart contract security contests and bug bounty programs,
+          with a focus on DeFi protocols, accounting correctness, oracle safety,
+          liquidation logic, and cross-chain systems.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>7</strong>
+            <span>Public findings on Cantina</span>
+          </div>
+
+          <div class="stat">
+            <strong>$568.30</strong>
+            <span>Public earnings on Cantina</span>
+          </div>
+
+          <div class="stat">
+            <strong>$5,000</strong>
+            <span>HackenProof high-severity bounty reward</span>
+          </div>
+
+          <div class="stat">
+            <strong>High</strong>
+            <span>Highest public bounty severity</span>
+          </div>
+        </div>
+
+        <h3>Selected Contest Results</h3>
+
+        <div class="result-card">
+          <strong>Solaxy</strong>
+          <p>Placed 7 / 19 — $394 payout — June 2025.</p>
+        </div>
+
+        <div class="result-card">
+          <strong>Revert Finance</strong>
+          <p>Placed 4 / 59 — $154 payout — March 2026.</p>
+        </div>
+
+        <div class="result-card">
+          <strong>Jigsaw Contracts</strong>
+          <p>Placed 58 / 114 — $20 payout — May 2025.</p>
+        </div>
+
+        <h3>Audit Portfolio</h3>
 
         <ul class="post-list">
           <li>
-            <a class="post-title" href="#">Audit Notes Coming Soon</a>
-            <p class="post-desc">Public notes from security contests and research practice.</p>
+            <a class="post-title" href="https://github.com/Okhayeeli/audits">
+              Public Audit Portfolio
+            </a>
+            <p class="post-desc">
+              A growing archive of my contest results, security research notes,
+              findings, and audit writeups.
+            </p>
           </li>
         </ul>
       </section>
@@ -266,8 +367,12 @@
 
         <ul class="post-list">
           <li>
-            <a class="post-title" href="#">Security Research Portfolio</a>
-            <p class="post-desc">A growing collection of notes, writeups, and audit research.</p>
+            <a class="post-title" href="https://github.com/Okhayeeli/audits">
+              Audit Portfolio Repository
+            </a>
+            <p class="post-desc">
+              Public security research portfolio containing audit notes, contest results, and findings.
+            </p>
           </li>
         </ul>
       </section>
