@@ -1,543 +1,863 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elizabeth Osueni</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap">
+<style>
+  :root {
+    --bg: #0f1610;
+    --bg-elevated: #151d17;
+    --bg-card: #1a231c;
+    --border: #2a3a2d;
+    --border-light: #344038;
+    --accent: #c8e64d;
+    --accent-dim: rgba(200,230,77,0.08);
+    --accent-glow: rgba(200,230,77,0.2);
+    --text: #e8e4d9;
+    --text-secondary: #8a9480;
+    --text-heading: #f5f2e8;
+    --font-display: 'Instrument Serif', 'Georgia', serif;
+    --font-body: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  }
 
-  <title>Elizabeth</title>
-  <meta name="description" content="Security researcher, writer, and engineer." />
-
-  <style>
-    * {
-      box-sizing: border-box;
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f3ee;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --border: #d8d5cb;
+      --border-light: #e4e1d8;
+      --accent: #4a7c10;
+      --accent-dim: rgba(74,124,16,0.07);
+      --accent-glow: rgba(74,124,16,0.15);
+      --text: #2c3025;
+      --text-secondary: #6b7264;
+      --text-heading: #151a12;
     }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f3ee;
+    --bg-elevated: #ffffff;
+    --bg-card: #ffffff;
+    --border: #d8d5cb;
+    --border-light: #e4e1d8;
+    --accent: #4a7c10;
+    --accent-dim: rgba(74,124,16,0.07);
+    --accent-glow: rgba(74,124,16,0.15);
+    --text: #2c3025;
+    --text-secondary: #6b7264;
+    --text-heading: #151a12;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1610;
+    --bg-elevated: #151d17;
+    --bg-card: #1a231c;
+    --border: #2a3a2d;
+    --border-light: #344038;
+    --accent: #c8e64d;
+    --accent-dim: rgba(200,230,77,0.08);
+    --accent-glow: rgba(200,230,77,0.2);
+    --text: #e8e4d9;
+    --text-secondary: #8a9480;
+    --text-heading: #f5f2e8;
+  }
 
-    body {
-      margin: 0;
-      font-family: "Courier New", monospace;
-      background: #ffffff;
-      color: #111;
-      line-height: 1.6;
-    }
+  *, *::before, *::after { box-sizing: border-box; }
 
-    a {
-      color: #333;
-      text-decoration: none;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    a:hover {
-      text-decoration: underline;
-    }
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+  a:hover { opacity: 0.8; }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 260px 1fr 260px;
-      min-height: 100vh;
-    }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-    .left-sidebar {
-      border-right: 1px solid #ddd;
-      padding: 40px 24px;
-      background: #fafafa;
-    }
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--text-heading);
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 450;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); opacity: 1; }
+  .theme-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .mob-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.3rem; padding: 4px; }
 
-    .profile-img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      margin: 0 auto 24px;
-      border: 1px solid #ccc;
-    }
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 0 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-text { max-width: 640px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+    line-height: 1.12;
+    color: var(--text-heading);
+    margin: 0 0 16px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 28px;
+    max-width: 520px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: transform 0.15s;
+    border: none;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #0f1610; }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-arrow { transition: transform 0.2s; }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
 
-    .name {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+  .avatar-wrap {
+    position: relative;
+    width: 200px; height: 200px;
+    flex-shrink: 0;
+  }
+  .avatar-glow {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg, var(--accent-glow), transparent 40%, var(--accent-glow));
+    animation: spin 10s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .avatar-glow { animation: none; } }
+  .avatar-wrap img {
+    position: relative;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--bg);
+  }
 
-    .role {
-      text-align: center;
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 44px;
-    }
+  /* ── STATS (left-aligned, like vishalsingh) ── */
+  .stats-bar {
+    border-top: 2px solid var(--accent);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 16px;
+  }
+  .stat-cell {
+    padding: 32px 0;
+    border-right: 1px solid var(--border);
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-val {
+    font-family: var(--font-body);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text-heading);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .stat-lbl {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
 
-    .nav {
+  /* ── TAGLINE BELOW STATS ── */
+  .tagline {
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 80px; }
+  .section-head {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--text-heading);
+    margin: 0 0 8px;
+    font-weight: 400;
+  }
+  .section-sub {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0 0 32px;
+  }
+
+  /* ── PROTOCOLS GRID ── */
+  .proto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .proto-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 36px 20px;
+    border: 1px solid var(--border);
+    margin: -0.5px;
+    transition: background 0.2s;
+  }
+  .proto-cell:hover { background: var(--accent-dim); }
+  .proto-icon {
+    width: 56px; height: 56px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-weight: 700;
+    font-family: var(--font-body);
+  }
+  .proto-name {
+    font-size: 0.88rem;
+    color: var(--text-heading);
+    font-weight: 500;
+    text-align: center;
+  }
+  .proto-tvl {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SPECIALIZATIONS ACCORDION ── */
+  .spec-list { list-style: none; padding: 0; margin: 0; }
+  .spec-item {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .spec-item:first-child { border-top: 1px solid var(--border); }
+  .spec-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 22px 0;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 16px;
+    text-align: left;
+    transition: color 0.2s;
+  }
+  .spec-header:hover { color: var(--text-heading); }
+  .spec-header:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .spec-num {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 400;
+    min-width: 24px;
+    opacity: 0.7;
+  }
+  .spec-title { flex: 1; }
+  .spec-toggle {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: border-color 0.2s, transform 0.3s, color 0.2s;
+  }
+  .spec-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 0 0 40px;
+  }
+  .spec-body-inner {
+    padding-bottom: 22px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 680px;
+  }
+  .spec-item.open .spec-toggle { transform: rotate(45deg); border-color: var(--accent); color: var(--accent); }
+  .spec-item.open { border-color: var(--accent); background: var(--accent-dim); }
+  .spec-item.open .spec-body { max-height: 420px; }
+
+  /* ── FINDINGS ── */
+  .finding-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .finding-card:hover { border-color: var(--border-light); }
+  .finding-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .sev {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .sev-high { background: rgba(239,68,68,0.12); color: #f87171; }
+  .sev-med { background: rgba(251,191,36,0.12); color: #fbbf24; }
+  .sev-low { background: rgba(96,165,250,0.12); color: #60a5fa; }
+  .finding-proto {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+  .finding-title {
+    font-size: 0.95rem;
+    color: var(--text-heading);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .finding-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── RESULTS TABLE ── */
+  .results-tbl { width: 100%; border-collapse: collapse; }
+  .results-tbl thead th {
+    text-align: left;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .results-tbl tbody td {
+    padding: 16px 12px 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .results-tbl tbody tr:last-child td { border-bottom: none; }
+
+  /* ── WRITEUPS ── */
+  .wu-list { list-style: none; padding: 0; margin: 0; }
+  .wu-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+  }
+  .wu-item:last-child { border-bottom: none; }
+  .wu-title { font-weight: 550; color: var(--text-heading); font-size: 0.95rem; margin-bottom: 4px; }
+  .wu-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+  .wu-tag {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    padding: 4px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .c-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px;
+    text-align: center;
+    transition: border-color 0.25s, transform 0.2s;
+    display: block;
+    color: var(--text);
+  }
+  .c-card:hover { border-color: var(--accent); transform: translateY(-2px); opacity: 1; }
+  .c-card svg { margin-bottom: 10px; }
+  .c-name { font-size: 0.82rem; font-weight: 550; color: var(--text-heading); margin-bottom: 2px; }
+  .c-handle { font-size: 0.75rem; color: var(--text-secondary); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 20px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .rv.vis { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding: 52px 0 40px; }
+    .hero-text { max-width: 100%; }
+    .hero-sub { max-width: 100%; }
+    .hero-ctas { justify-content: center; }
+    .avatar-wrap { width: 140px; height: 140px; margin: 0 auto 20px; order: -1; }
+    .avatar-wrap img { width: 140px; height: 140px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-cell:nth-child(2) { border-right: none; }
+    .proto-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-row { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    .nav-links.open {
       display: flex;
       flex-direction: column;
-      gap: 26px;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .main {
-      padding: 90px 80px;
-      max-width: 950px;
-    }
-
-    .intro h1 {
-      font-size: 24px;
-      margin-bottom: 24px;
-    }
-
-    .intro ul {
-      margin-top: 0;
-      margin-bottom: 60px;
-    }
-
-    .section {
-      margin-bottom: 70px;
-    }
-
-    .section h2 {
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .section h3 {
-      font-size: 18px;
-      margin-top: 30px;
-      margin-bottom: 14px;
-    }
-
-    .section ul {
-      padding-left: 25px;
-    }
-
-    .post-list {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .post-list li {
-      margin-bottom: 18px;
-    }
-
-    .post-title {
-      font-weight: 700;
-    }
-
-    .post-desc {
-      color: #555;
-      margin: 4px 0 0;
-      font-size: 14px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      position: absolute;
+      top: 56px; left: 0; right: 0;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
       gap: 14px;
-      margin-top: 20px;
     }
-
-    .stat {
-      border: 1px solid #ddd;
-      padding: 18px;
-      border-radius: 8px;
-      background: #fafafa;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 24px;
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      color: #555;
-      font-size: 14px;
-    }
-
-    .card {
-      border: 1px solid #ddd;
-      padding: 18px;
-      margin-bottom: 16px;
-      border-radius: 8px;
-      background: #fafafa;
-    }
-
-    .card p {
-      margin: 6px 0 0;
-      color: #555;
-      font-size: 14px;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-left: 0;
-      list-style: none;
-      margin-top: 12px;
-    }
-
-    .tag-list li {
-      border: 1px solid #ddd;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: #fff;
-      font-size: 13px;
-      color: #444;
-    }
-
-    .right-sidebar {
-      border-left: 1px solid #ddd;
-      padding: 40px 28px;
-      background: #fafafa;
-    }
-
-    .connect-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 26px;
-    }
-
-    .connect {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      font-size: 15px;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        display: block;
-      }
-
-      .left-sidebar,
-      .right-sidebar {
-        border: none;
-        padding: 30px 22px;
-      }
-
-      .nav,
-      .connect {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 16px;
-        justify-content: center;
-      }
-
-      .main {
-        padding: 40px 24px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="layout">
-
-    <aside class="left-sidebar">
-      <img
-        src="https://avatars.githubusercontent.com/Okhayeeli"
-        alt="Profile image"
-        class="profile-img"
-      />
-
-      <div class="name">Elizabeth</div>
-
-      <div class="role">
-        Security Researcher &<br />
-        Developer
-      </div>
-
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="#portfolio">Security Portfolio</a>
-        <a href="#audits">Audits & Results</a>
-        <a href="#projects">Projects</a>
-        <a href="#writeups">Writeups</a>
-        <a href="#analysis">Analysis</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </aside>
-
-    <main class="main">
-
-      <section class="intro">
-        <h1>Elizabeth</h1>
-
-        <ul>
-          <li>Smart Contract Security Researcher</li>
-          <li>Building knowledge around EVM, Solana, Rust, and DeFi security</li>
-          <li>Auditor on competitive platforms including Cantina and Sherlock</li>
-          <li>Writing and building in public</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Core Skills</h2>
-
-        <ul>
-          <li><strong>Focus:</strong> Smart contract security and DeFi protocol analysis</li>
-          <li><strong>Toolkit:</strong> Foundry, Slither</li>
-          <li><strong>Languages:</strong> Solidity, Rust, Python</li>
-          <li><strong>Interests:</strong> EVM, Solana, lending protocols, oracles, bridges</li>
-        </ul>
-
-        <ul class="tag-list">
-          <li>Solidity</li>
-          <li>Rust</li>
-          <li>Foundry</li>
-          <li>DeFi</li>
-          <li>Oracles</li>
-          <li>Lending</li>
-          <li>Bridges</li>
-        </ul>
-      </section>
-
-      <section class="section" id="portfolio">
-        <h2>Security Portfolio</h2>
-
-        <p>
-          My security portfolio collects audit notes, contest results, vulnerability research,
-          bug bounty work, public findings, and technical writeups.
-        </p>
-
-        <div class="card">
-          <a class="post-title" href="https://github.com/Okhayeeli/audits">
-            Audit Portfolio Repository
-          </a>
-          <p>
-            A public archive of my smart contract security contests, findings,
-            audit notes, research notes, and proof-of-work.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Security Research Notes</span>
-          <p>
-            Notes from studying real exploits, bug classes, lending protocol failures,
-            oracle issues, accounting bugs, and cross-chain security problems.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Proof-of-Concept Practice</span>
-          <p>
-            Practical testing work using tools like Foundry, Hardhat, Rust test suites,
-            and protocol-specific test environments.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Bug Bounty & Contest Reports</span>
-          <p>
-            Publicly shareable contest results, bounty achievements, and writeups
-            from competitive security platforms.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="audits">
-        <h2>Audits & Security Research</h2>
-
-        <p>
-          I participate in smart contract security contests and bug bounty programs,
-          with a focus on DeFi protocols, accounting correctness, oracle safety,
-          liquidation logic, and cross-chain systems.
-        </p>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>8+</strong>
-            <span>Public findings across contests and bounty platforms</span>
-          </div>
-
-          <div class="stat">
-            <strong>10+</strong>
-            <span>Additional valid findings identified but marked as duplicates</span>
-          </div>
-
-          <div class="stat">
-            <strong>$1,509.32+</strong>
-            <span>Public contest earnings across Cantina and Sherlock</span>
-          </div>
-
-          <div class="stat">
-            <strong>$5,000</strong>
-            <span>HackenProof high-severity bounty reward</span>
-          </div>
-
-          <div class="stat">
-            <strong>High</strong>
-            <span>Highest public bounty severity</span>
-          </div>
-        </div>
-
-        <p>
-          In addition to my public accepted findings, I have independently identified
-          10+ other valid security issues that were later marked as duplicates in
-          competitive audit contests. These duplicates still represent real protocol
-          analysis, bug discovery, and vulnerability reasoning experience.
-        </p>
-
-        <h3>Selected Contest Results</h3>
-
-        <div class="card">
-          <strong>Neutrl Protocol</strong>
-          <p>
-            Sherlock contest — 1 Medium-severity finding — 941.02 USDC reward.
-          </p>
-          <p>
-            Finding: Fully blacklisted users can stake and specify a different receiver address.
-          </p>
-        </div>
-
-        <div class="card">
-          <strong>Solaxy</strong>
-          <p>Placed 7 / 19 — $394 payout — June 2025.</p>
-        </div>
-
-        <div class="card">
-          <strong>Revert Finance</strong>
-          <p>Placed 4 / 59 — $154 payout — March 2026.</p>
-        </div>
-
-        <div class="card">
-          <strong>Jigsaw Contracts</strong>
-          <p>Placed 58 / 114 — $20 payout — May 2025.</p>
-        </div>
-
-        <h3>HackenProof Achievement</h3>
-
-        <div class="card">
-          <strong>High-Severity Bounty Reward</strong>
-          <p>
-            Reported a high-severity vulnerability through HackenProof and received
-            a $5,000 bounty reward.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="projects">
-        <h2>Projects & Things I Made</h2>
-
-        <div class="card">
-          <a class="post-title" href="https://github.com/Okhayeeli/audits">
-            Public Audit Portfolio
-          </a>
-          <p>
-            A dedicated repository for my audit reports, contest notes,
-            findings, and smart contract security research.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Finding Templates</span>
-          <p>
-            Reusable templates for documenting vulnerability title, severity,
-            root cause, impact, attack path, and recommendation.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Audit Learning Notes</span>
-          <p>
-            Structured notes from protocol reviews, exploit breakdowns, and
-            security concepts I am learning in public.
-          </p>
-        </div>
-
-        <div class="card">
-          <span class="post-title">Protocol Review Practice</span>
-          <p>
-            Personal review work across DeFi protocols, lending systems,
-            oracle designs, bridge logic, and blockchain infrastructure.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="writeups">
-        <h2>Writeups</h2>
-
-        <ul class="post-list">
-          <li>
-            <a class="post-title" href="#">My First Note</a>
-            <p class="post-desc">Why I am starting to write publicly.</p>
-          </li>
-
-          <li>
-            <a class="post-title" href="#">Understanding Oracle Staleness</a>
-            <p class="post-desc">A beginner-friendly note on stale prices and lending protocol risk.</p>
-          </li>
-
-          <li>
-            <a class="post-title" href="#">How Lending Protocols Break</a>
-            <p class="post-desc">Notes on collateral, borrowing, liquidation, and accounting bugs.</p>
-          </li>
-        </ul>
-      </section>
-
-      <section class="section" id="analysis">
-        <h2>Analysis</h2>
-
-        <ul class="post-list">
-          <li>
-            <a class="post-title" href="#">Oracle Staleness and Price Validation</a>
-            <p class="post-desc">How stale prices can create insolvency and broken liquidations.</p>
-          </li>
-
-          <li>
-            <a class="post-title" href="#">Invariant-Mismatch Thinking</a>
-            <p class="post-desc">How to trace valid protocol states that later become unsafe or unrecoverable.</p>
-          </li>
-
-          <li>
-            <a class="post-title" href="#">Liquidation and Accounting Bugs</a>
-            <p class="post-desc">Research notes on bad debt, health factors, and broken state transitions.</p>
-          </li>
-        </ul>
-      </section>
-
-      <section class="section" id="resume">
-        <h2>Resume</h2>
-
-        <p>
-          Resume coming soon. Current public proof-of-work is available through
-          my audit portfolio and GitHub repositories.
-        </p>
-
-        <ul class="post-list">
-          <li>
-            <a class="post-title" href="https://github.com/Okhayeeli/audits">
-              View Audit Portfolio
-            </a>
-            <p class="post-desc">Security research, contest results, and audit notes.</p>
-          </li>
-        </ul>
-      </section>
-
-      <section class="section" id="contact">
-        <h2>Contact</h2>
-
-        <p>
-          Reach me through GitHub, X, LinkedIn, or email.
-        </p>
-      </section>
-    </main>
-
-    <aside class="right-sidebar">
-      <div class="connect-title">CONNECT</div>
-
-      <div class="connect">
-        <a href="https://github.com/Okhayeeli">GitHub</a>
-        <a href="https://www.linkedin.com/in/yourlinkedin">LinkedIn</a>
-        <a href="https://x.com/OsueniElizabeth">X</a>
-        <a href="mailto:okhayeelizabeth@gmail.com">Email</a>
-      </div>
-    </aside>
-
+    .mob-toggle { display: block; }
+    .wu-item { grid-template-columns: 1fr; }
+    section { margin-bottom: 56px; }
+  }
+  @media (max-width: 480px) {
+    .contact-row { grid-template-columns: 1fr 1fr; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .proto-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo">Elizabeth Osueni</a>
+    <button class="mob-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="nav-links">
+      <a href="#specializations">Services</a>
+      <a href="#findings">Findings</a>
+      <a href="#writeups">Blog</a>
+      <a href="#contact">Get in Touch</a>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button>
+    </div>
   </div>
-</body>
-</html>
+</nav>
+
+<!-- HERO -->
+<header class="wrap">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Security for <em>smart contracts</em> and DeFi infrastructure</h1>
+      <p class="hero-sub">Independent security researcher specializing in EVM, Solana, and DeFi protocol analysis. 45+ issues disclosed across Sherlock, Code4rena, Cantina, and HackenProof — including a first-place contest finish — and top-10 rated on 4 HackenProof programs.</p>
+      <div class="hero-ctas">
+        <a href="mailto:okhayeelizabeth@gmail.com" class="btn btn-primary">Get in touch <span class="btn-arrow">&rarr;</span></a>
+        <a href="https://github.com/Okhayeeli/audits" class="btn btn-ghost" target="_blank" rel="noopener">View portfolio &nearr;</a>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-glow"></div>
+      <img src="https://avatars.githubusercontent.com/Okhayeeli" alt="Elizabeth Osueni" loading="eager">
+    </div>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="wrap rv">
+  <div class="stats-bar">
+    <div class="stat-cell">
+      <div class="stat-val">25+</div>
+      <div class="stat-lbl">Audits Completed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">$157M+</div>
+      <div class="stat-lbl">TVL Secured</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">45+</div>
+      <div class="stat-lbl">Issues Disclosed</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">Top 10</div>
+      <div class="stat-lbl">on 4 HackenProof Programs</div>
+    </div>
+  </div>
+  <div class="tagline">Focused on DeFi protocol security, oracle safety, and cross-chain bridge integrity</div>
+</div>
+
+<!-- PROTOCOLS REVIEWED -->
+<section class="wrap rv" id="protocols">
+  <h2 class="section-head">Protocols reviewed</h2>
+  <p class="section-sub">Bug bounty and competitive audit engagements across DeFi, bridges, and L1/L2 infrastructure</p>
+  <div class="proto-grid">
+    <div class="proto-cell">
+      <div class="proto-icon">N</div>
+      <div class="proto-name">Navi Protocol</div>
+      <div class="proto-tvl">TVL $138.9M</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">S</div>
+      <div class="proto-name">Scallop Protocol</div>
+      <div class="proto-tvl">TVL $10.2M</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">&#9670;</div>
+      <div class="proto-name">StarkNet Staking</div>
+      <div class="proto-tvl">L2 Infra</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">H</div>
+      <div class="proto-name">Hyperbridge</div>
+      <div class="proto-tvl">Cross-chain</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">E</div>
+      <div class="proto-name">Ember EVM</div>
+      <div class="proto-tvl">Smart Contracts</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">R</div>
+      <div class="proto-name">Revert Finance</div>
+      <div class="proto-tvl">TVL $8M</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">&#9651;</div>
+      <div class="proto-name">Neutrl Protocol</div>
+      <div class="proto-tvl">DeFi</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">&#9675;</div>
+      <div class="proto-name">Solaxy</div>
+      <div class="proto-tvl">Solana L2</div>
+    </div>
+    <div class="proto-cell">
+      <div class="proto-icon">J</div>
+      <div class="proto-name">Jigsaw</div>
+      <div class="proto-tvl">Smart Contracts</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIZATIONS ACCORDION -->
+<section class="wrap rv" id="specializations">
+  <h2 class="section-head">Specializations</h2>
+  <ul class="spec-list">
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">01</span>
+        <span class="spec-title">Smart Contract Security</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Manual review of Solidity and Rust contracts — access control, reentrancy, logic flaws, economic exploits, state-machine invariants, and storage collision analysis.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">02</span>
+        <span class="spec-title">DeFi Primitives</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Lending, borrowing, liquidation, and accounting flows. Identifying bad-debt scenarios, health factor edge cases, collateral mismanagement, and unsafe state transitions.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">03</span>
+        <span class="spec-title">Oracle &amp; Price Feed Security</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Staleness checks, manipulation resistance, fallback logic, and TWAP configuration. Understanding how price data breaks downstream accounting and creates insolvency vectors.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">04</span>
+        <span class="spec-title">Cross-Chain &amp; Bridges</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Message verification, relay trust assumptions, share-value conservation across chains, and state synchronization risks in cross-chain vault and bridge architectures.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">05</span>
+        <span class="spec-title">EVM</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Deep understanding of the Ethereum Virtual Machine — storage layout, gas optimizations, delegatecall patterns, proxy upgradability, and low-level assembly review.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">06</span>
+        <span class="spec-title">Solana</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">Program-level security on Solana — account validation, PDA derivation, CPI safety, and Anchor framework patterns. Active in Solana-focused bug bounty programs.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">07</span>
+        <span class="spec-title">L1s, L2s, and Rollups</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">I&rsquo;ll follow state and message flow across the network, execution environment, bridge, and settlement boundary rather than treating each component in isolation. Review surfaces: state transitions, validation logic, sequencing, and settlement assumptions; messaging, bridge paths, replay protection, and finality boundaries; precompiles, resource limits, malformed inputs, and denial-of-service surfaces.</div></div>
+    </li>
+    <li class="spec-item">
+      <button class="spec-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="spec-num">08</span>
+        <span class="spec-title">Formal Verification, Fuzzing &amp; Static Analysis</span>
+        <span class="spec-toggle">+</span>
+      </button>
+      <div class="spec-body"><div class="spec-body-inner">I&rsquo;ll use manual review alongside automated techniques when the repository, test harnesses, and threat model support them. These methods supplement review; they do not replace understanding the system. Review surfaces: security invariants, property tests, and stateful behavior; static-analysis findings, fuzzing targets, harness quality, and input boundaries; formal or invariant reasoning for security-critical transitions and verifier logic.</div></div>
+    </li>
+  </ul>
+</section>
+
+<!-- KEY FINDINGS -->
+<section class="wrap rv" id="findings">
+  <h2 class="section-head">Selected Findings</h2>
+  <p class="section-sub">Representative vulnerabilities from competitive audits and bug bounty programs</p>
+
+  <div class="finding-card">
+    <div class="finding-meta">
+      <span class="sev sev-high">High</span>
+      <span class="finding-proto">HackenProof &middot; First Blood</span>
+    </div>
+    <div class="finding-title">High-severity vulnerability in production protocol</div>
+    <div class="finding-desc">First blood achievement — first researcher to identify and report a critical vulnerability in a live bounty program.</div>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-meta">
+      <span class="sev sev-high">High</span>
+      <span class="finding-proto">Cross-Chain Bridge</span>
+    </div>
+    <div class="finding-title">Cross-chain share bridge conserves count but not value</div>
+    <div class="finding-desc">Share bridge preserves share count across chains but not share value — any user can mint an inflated claim on a destination vault whenever two chains' exchange rates differ, draining depositors' funds.</div>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-meta">
+      <span class="sev sev-med">Medium</span>
+      <span class="finding-proto">Neutrl Protocol &middot; Sherlock</span>
+    </div>
+    <div class="finding-title">Blacklisted user staking vulnerability</div>
+    <div class="finding-desc">Blacklisted addresses could bypass restrictions through the staking mechanism, maintaining protocol access that should have been revoked.</div>
+  </div>
+</section>
+
+<!-- CONTEST RESULTS -->
+<section class="wrap rv">
+  <h2 class="section-head">Audit Results</h2>
+  <div style="overflow-x:auto;">
+    <table class="results-tbl">
+      <thead>
+        <tr>
+          <th>Contest</th>
+          <th>Platform</th>
+          <th>Placement</th>
+          <th>Severity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">First-place finish</td>
+          <td>Competitive Audit</td>
+          <td style="color:var(--accent);font-weight:600;">1st</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">Revert Finance</td>
+          <td>Competitive Audit</td>
+          <td style="color:var(--accent);font-weight:600;">4 / 59</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">Solaxy</td>
+          <td>Competitive Audit</td>
+          <td style="color:var(--accent);font-weight:600;">7 / 19</td>
+          <td>&mdash;</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">K2</td>
+          <td>Code4rena</td>
+          <td>&mdash;</td>
+          <td>4 findings</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">stNXM (EaseDeFi)</td>
+          <td>Sherlock</td>
+          <td>&mdash;</td>
+          <td>3 findings</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-heading);font-weight:500;">Neutrl Protocol</td>
+          <td>Sherlock</td>
+          <td>&mdash;</td>
+          <td><span class="sev sev-med">Medium</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:20px;font-size:0.88rem;color:var(--text-secondary);">25+ audits across <strong style="color:var(--text);">Sherlock</strong>, <strong style="color:var(--text);">Code4rena</strong>, <strong style="color:var(--text);">Cantina</strong>, and <strong style="color:var(--text);">HackenProof</strong> &mdash; 45+ issues disclosed including 6 High and 19 Medium contest findings, 1&times; first place, 3&times; top-10, 7&times; top-25 placements. See the full record on <a href="https://audits.sherlock.xyz/watson/khaye26" target="_blank" rel="noopener">Sherlock</a>.</p>
+</section>
+
+<!-- WRITEUPS -->
+<section class="wrap rv" id="writeups">
+  <h2 class="section-head">Writeups &amp; Research</h2>
+  <ul class="wu-list">
+    <li class="wu-item">
+      <div>
+        <div class="wu-title">Understanding Oracle Staleness</div>
+        <div class="wu-desc">How stale prices cause insolvency and bad liquidations — a guide to oracle validation, heartbeat checks, and the downstream impact on lending protocol accounting.</div>
+      </div>
+      <span class="wu-tag">Oracles</span>
+    </li>
+    <li class="wu-item">
+      <div>
+        <div class="wu-title">How Lending Protocols Break</div>
+        <div class="wu-desc">Collateral, borrowing, liquidation, and accounting bugs. Covers bad debt creation, health factor manipulation, and state transitions that break protocol invariants.</div>
+      </div>
+      <span class="wu-tag">DeFi</span>
+    </li>
+    <li class="wu-item">
+      <div>
+        <div class="wu-title">Invariant-Mismatch Thinking</div>
+        <div class="wu-desc">Tracing unsafe protocol states by identifying where expected invariants diverge from actual contract behavior under adversarial conditions.</div>
+      </div>
+      <span class="wu-tag">Method</span>
+    </li>
+  </ul>
+</section>
+
+<!-- CONTACT -->
+<section class="wrap rv" id="contact">
+  <h2 class="section-head">Get in Touch</h2>
+  <p class="section-sub">Open to competitive audit collaborations, private reviews, and bug bounty partnerships</p>
+  <div class="contact-row">
+    <a href="https://github.com/Okhayeeli" target="_blank" rel="noopener" class="c-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.79-.26.79-.58v-2.17c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016.02 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.19.7.8.58A12.01 12.01 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      <div class="c-name">GitHub</div>
+      <div class="c-handle">Okhayeeli</div>
+    </a>
+    <a href="https://x.com/OsueniElizabeth" target="_blank" rel="noopener" class="c-card">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      <div class="c-name">X / Twitter</div>
+      <div class="c-handle">@OsueniElizabeth</div>
+    </a>
+    <a href="https://hackenproof.com/hackers/ky26" target="_blank" rel="noopener" class="c-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.83-3.13 9.37-7 10.5-3.87-1.13-7-5.67-7-10.5V6.3l7-3.12zM10 15.5l-3.5-3.5 1.41-1.41L10 12.67l5.59-5.59L17 8.5l-7 7z"/></svg>
+      <div class="c-name">HackenProof</div>
+      <div class="c-handle">ky26 &middot; Rank #378</div>
+    </a>
+    <a href="https://audits.sherlock.xyz/watson/khaye26" target="_blank" rel="noopener" class="c-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <div class="c-name">Sherlock</div>
+      <div class="c-handle">khaye26</div>
+    </a>
+    <a href="mailto:okhayeelizabeth@gmail.com" class="c-card">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+      <div class="c-name">Email</div>
+      <div class="c-handle">okhayeelizabeth</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">&copy; 2025 Elizabeth Osueni &middot; Security Researcher &amp; Auditor</div>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const r = document.documentElement;
+    const c = r.getAttribute('data-theme');
+    const n = c === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', n);
+    try { localStorage.setItem('theme', n); } catch(e) {}
+  }
+  try { const s = localStorage.getItem('theme'); if (s) document.documentElement.setAttribute('data-theme', s); } catch(e) {}
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
